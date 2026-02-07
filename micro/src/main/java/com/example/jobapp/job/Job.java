@@ -1,19 +1,26 @@
 package com.example.jobapp.job;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
+@Entity
+@Table(name ="job_title")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Job {
 
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
     private String description;
     private String minSalary;
     private String maxSalary;
     private String location;
+
+    public Job() {
+    }
 
     public Job(Long id, String location, String maxSalary, String minSalary, String description, String title) {
         this.id = id;
