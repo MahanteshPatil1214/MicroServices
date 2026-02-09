@@ -21,8 +21,8 @@ public class ReviewController {
      }
 
      @PostMapping("/reviews")
-    public ResponseEntity<String> createReview(@PathVariable Long companyId,
-            @RequestBody Review review) {
+    public ResponseEntity<String> addReview(@PathVariable Long companyId,
+                                            @RequestBody Review review) {
        boolean addReview = reviewService.addReview(companyId,review);
         if(addReview)
          return new ResponseEntity<>("Review Added Successfully",HttpStatus.CREATED);
@@ -31,9 +31,34 @@ public class ReviewController {
      }
 
      @GetMapping("/reviews/{reviewId}")
-    public ResponseEntity<Review> getReviewById(@PathVariable Long companyId,
-            @PathVariable Long reviewId){
+    public ResponseEntity<Review> getReview(@PathVariable Long companyId,
+                                            @PathVariable Long reviewId){
         Review review = reviewService.getReview(companyId,reviewId);
         return new ResponseEntity<>(review,HttpStatus.OK);
      }
+
+     @PutMapping("/review/{reviewId}")
+    public ResponseEntity<String> updateReview(@PathVariable Long companyId,
+                                               @PathVariable Long reviewId,
+                                               @RequestBody Review review){
+        boolean updateReview = reviewService.updateReview(companyId,reviewId,review);
+        if(updateReview)
+            return new ResponseEntity<>("Review Updated Successfully",HttpStatus.OK);
+        else
+            return new ResponseEntity<>("Review Not Updated",HttpStatus.NOT_FOUND);
+     }
+
+    @DeleteMapping("/review/{reviewId}")
+    public ResponseEntity<String> deleteReview(@PathVariable Long companyId,
+                                               @PathVariable Long reviewId){
+        boolean deleteReview = reviewService.deleteReview(companyId,reviewId);
+        if(deleteReview)
+            return new ResponseEntity<>("Review deleted Successfully",HttpStatus.OK);
+        else
+            return new ResponseEntity<>("Review Not deleted",HttpStatus.NOT_FOUND);
+    }
+
+
+
+
 }
