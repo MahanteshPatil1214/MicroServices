@@ -7,8 +7,6 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name ="job_title")
-@NoArgsConstructor
-@AllArgsConstructor
 public class Job {
 
     @Id
